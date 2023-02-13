@@ -257,6 +257,7 @@ Handles specific State commands
 
     def do_BaseModel(self, line):
         """
+Handles specific BaseModel commands
         """
         if not line.endswith(")") \
                 and line.count(")") != 1 and line.count(")") != 1:
@@ -303,9 +304,200 @@ Handles specific State commands
         else:
             return cmd.Cmd.default(self, "BaseModel" + line)
 
+    def do_City(self, line):
+        """
+Handles specific City commands
+        """
+        if not line.endswith(")") \
+                and line.count(")") != 1 and line.count(")") != 1:
+            return cmd.Cmd.default(self, "City" + line)
+        args_list = parse(line)
+        if line == ".all()":
+            return cmd.Cmd.onecmd(self, "all City")
+        if line == ".count()":
+            count = 0
+            for key in self.__objects.keys():
+                if key.startswith("City"):
+                    count += 1
+            print(count)
+        elif args_list[0] == "show":
+            return cmd.Cmd.onecmd(
+                self, "show City " + args_list[1].strip('"'))
+        elif args_list[0] == "destroy":
+            return cmd.Cmd.onecmd(
+                self, "destroy City " + args_list[1].strip('"'))
+        elif args_list[0] == "update":
+            try:
+                args = args_list[1].split(", ", 1)
+                user_id = args[0].strip('"')
+                key = "City." + user_id
+                if key not in self.__objects and user_id:
+                    print("** no instance found **")
+                    return
+                update_dict = json.loads(args[1].replace("'", '"'))
+                for key, value in update_dict.items():
+                    cmd.Cmd.onecmd(
+                        self, 'update City {} {} "{}"'.format(
+                            user_id, key, value))
+            except Exception:
+                args_str = ""
+                for idx, token in enumerate(args):
+                    if idx != 0:
+                        args_str += " "
+                    if idx == 0 or idx == 1:
+                        args_str += token.strip('"')
+                    else:
+                        args_str += token
+                        return cmd.Cmd.onecmd(self, "update City " + args_str)
+        else:
+            return cmd.Cmd.default(self, "City" + line)
+
+    def do_Amenity(self, line):
+        """
+Handles specific Amenity commands
+        """
+        if not line.endswith(")") \
+                and line.count(")") != 1 and line.count(")") != 1:
+            return cmd.Cmd.default(self, "Amenity" + line)
+        args_list = parse(line)
+        if line == ".all()":
+            return cmd.Cmd.onecmd(self, "all Amenity")
+        if line == ".count()":
+            count = 0
+            for key in self.__objects.keys():
+                if key.startswith("Amenity"):
+                    count += 1
+            print(count)
+        elif args_list[0] == "show":
+            return cmd.Cmd.onecmd(
+                self, "show Amenity " + args_list[1].strip('"'))
+        elif args_list[0] == "destroy":
+            return cmd.Cmd.onecmd(
+                self, "destroy Amenity " + args_list[1].strip('"'))
+        elif args_list[0] == "update":
+            try:
+                args = args_list[1].split(", ", 1)
+                user_id = args[0].strip('"')
+                key = "Amenity." + user_id
+                if key not in self.__objects and user_id:
+                    print("** no instance found **")
+                    return
+                update_dict = json.loads(args[1].replace("'", '"'))
+                for key, value in update_dict.items():
+                    cmd.Cmd.onecmd(
+                        self, 'update Amenity {} {} "{}"'.format(
+                            user_id, key, value))
+            except Exception:
+                args_str = ""
+                for idx, token in enumerate(args):
+                    if idx != 0:
+                        args_str += " "
+                    if idx == 0 or idx == 1:
+                        args_str += token.strip('"')
+                    else:
+                        args_str += token
+                return cmd.Cmd.onecmd(self, "update Amenity " + args_str)
+        else:
+            return cmd.Cmd.default(self, "Amenity" + line)
+
+    def do_Place(self, line):
+        """
+Handles specific Place commands
+        """
+        if not line.endswith(")") \
+                and line.count(")") != 1 and line.count(")") != 1:
+            return cmd.Cmd.default(self, "Place" + line)
+        args_list = parse(line)
+        if line == ".all()":
+            return cmd.Cmd.onecmd(self, "all Place")
+        if line == ".count()":
+            count = 0
+            for key in self.__objects.keys():
+                if key.startswith("Place"):
+                    count += 1
+            print(count)
+        elif args_list[0] == "show":
+            return cmd.Cmd.onecmd(
+                self, "show Place " + args_list[1].strip('"'))
+        elif args_list[0] == "destroy":
+            return cmd.Cmd.onecmd(
+                self, "destroy Place " + args_list[1].strip('"'))
+        elif args_list[0] == "update":
+            try:
+                args = args_list[1].split(", ", 1)
+                user_id = args[0].strip('"')
+                key = "Place." + user_id
+                if key not in self.__objects and user_id:
+                    print("** no instance found **")
+                    return
+                update_dict = json.loads(args[1].replace("'", '"'))
+                for key, value in update_dict.items():
+                    cmd.Cmd.onecmd(
+                        self, 'update Place {} {} "{}"'.format(
+                            user_id, key, value))
+            except Exception:
+                args_str = ""
+                for idx, token in enumerate(args):
+                    if idx != 0:
+                        args_str += " "
+                    if idx == 0 or idx == 1:
+                        args_str += token.strip('"')
+                    else:
+                        args_str += token
+                return cmd.Cmd.onecmd(self, "update Place " + args_str)
+        else:
+            return cmd.Cmd.default(self, "Place" + line)
+
+    def do_Review(self, line):
+        """
+Handles specific Review commands
+        """
+        if not line.endswith(")") \
+                and line.count(")") != 1 and line.count(")") != 1:
+            return cmd.Cmd.default(self, "Review" + line)
+        args_list = parse(line)
+        if line == ".all()":
+            return cmd.Cmd.onecmd(self, "all Review")
+        if line == ".count()":
+            count = 0
+            for key in self.__objects.keys():
+                if key.startswith("Review"):
+                    count += 1
+            print(count)
+        elif args_list[0] == "show":
+            return cmd.Cmd.onecmd(
+                self, "show Review " + args_list[1].strip('"'))
+        elif args_list[0] == "destroy":
+            return cmd.Cmd.onecmd(
+                self, "destroy Review " + args_list[1].strip('"'))
+        elif args_list[0] == "update":
+            try:
+                args = args_list[1].split(", ", 1)
+                user_id = args[0].strip('"')
+                key = "Review." + user_id
+                if key not in self.__objects and user_id:
+                    print("** no instance found **")
+                    return
+                update_dict = json.loads(args[1].replace("'", '"'))
+                for key, value in update_dict.items():
+                    cmd.Cmd.onecmd(
+                        self, 'update Review {} {} "{}"'.format(
+                            user_id, key, value))
+            except Exception:
+                args_str = ""
+                for idx, token in enumerate(args):
+                    if idx != 0:
+                        args_str += " "
+                    if idx == 0 or idx == 1:
+                        args_str += token.strip('"')
+                    else:
+                        args_str += token
+                return cmd.Cmd.onecmd(self, "update Review " + args_str)
+        else:
+            return cmd.Cmd.default(self, "Review" + line)
+
     def do_quit(self, s):
         """
-
 Quit command to exit the program
         """
         return True
